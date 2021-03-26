@@ -30,8 +30,10 @@ public class EmployeeController {
 		Employee employee = Employee.builder().id(1L).name("Thirumal").dob(LocalDate.now()).build();
 		XmlMapper xmlMapper = new XmlMapper();
 		//xmlMapper.setAnnotationIntrospector(new XmlAnnotationIntrospector());
-		String xml = xmlMapper.writer().withRootName("Emp").withDefaultPrettyPrinter().writeValueAsString(employee);
+		String xml = xmlMapper.writerWithView(Views.Default.class).withRootName("Emp")				
+				.withDefaultPrettyPrinter().writeValueAsString(employee);
 		System.out.println(xml);
 		return xml;
 	}
 }
+
